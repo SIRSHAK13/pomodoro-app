@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Focus</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="timer-panel" aria-label="Pomodoro timer">
+        <header class="top-bar">
+          <div>
+            <p class="eyebrow">Focus desk</p>
+            <h1>Pomodoro</h1>
+          </div>
+          <button class="icon-button" id="soundToggle" type="button" aria-label="Toggle sound">
+            <svg class="sound-icon sound-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4Z"></path>
+              <path d="M16 8c1.4 1.5 1.4 6.5 0 8"></path>
+              <path d="M18.7 5.5c2.8 3.2 2.8 9.8 0 13"></path>
+            </svg>
+            <svg class="sound-icon sound-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4Z"></path>
+              <path d="M17 9l4 4"></path>
+              <path d="M21 9l-4 4"></path>
+            </svg>
+          </button>
+        </header>
+
+        <div class="mode-tabs" role="tablist" aria-label="Timer mode">
+          <button class="mode-button active" type="button" data-mode="focus">Focus</button>
+          <button class="mode-button" type="button" data-mode="short">Short break</button>
+          <button class="mode-button" type="button" data-mode="long">Long break</button>
+        </div>
+
+        <div class="clock-wrap">
+          <svg class="progress-ring" viewBox="0 0 240 240" aria-hidden="true">
+            <circle class="ring-track" cx="120" cy="120" r="104"></circle>
+            <circle class="ring-value" id="ringValue" cx="120" cy="120" r="104"></circle>
+          </svg>
+          <div class="ring-marker" id="ringMarker" aria-hidden="true"></div>
+          <div class="time-readout">
+            <p id="modeLabel">Focus</p>
+            <strong id="timeDisplay">25:00</strong>
+          </div>
+        </div>
+
+        <div class="primary-actions">
+          <button class="main-button" id="startPause" type="button">Start</button>
+          <button class="secondary-button" id="resetTimer" type="button">Reset</button>
+          <button class="secondary-button" id="skipTimer" type="button">Skip</button>
+        </div>
+
+        <label class="task-field">
+          <span>Today I am focusing on</span>
+          <input id="taskInput" type="text" maxlength="60" placeholder="one clear task" />
+        </label>
+      </section>
+
+      <aside class="side-panel" aria-label="Settings and progress">
+        <section class="settings">
+          <div class="section-heading">
+            <h2>Timer Lengths</h2>
+            <button class="text-button" id="restoreDefaults" type="button">Defaults</button>
+          </div>
+
+          <div class="setting-row">
+            <label for="focusMinutes">Focus</label>
+            <input id="focusMinutes" type="number" min="1" max="90" value="25" />
+          </div>
+          <div class="setting-row">
+            <label for="shortMinutes">Short break</label>
+            <input id="shortMinutes" type="number" min="1" max="30" value="5" />
+          </div>
+          <div class="setting-row">
+            <label for="longMinutes">Long break</label>
+            <input id="longMinutes" type="number" min="1" max="60" value="15" />
+          </div>
+          <div class="setting-row">
+            <label for="cyclesBeforeLong">Long break after</label>
+            <input id="cyclesBeforeLong" type="number" min="2" max="8" value="4" />
+          </div>
+        </section>
+
+        <section class="stats">
+          <div class="section-heading">
+            <h2>Today</h2>
+            <button class="text-button" id="resetRounds" type="button">Reset rounds</button>
+          </div>
+          <div class="stat-grid">
+            <div>
+              <span id="completedCount">0</span>
+              <p>focus rounds</p>
+            </div>
+            <div>
+              <span id="focusMinutesDone">0</span>
+              <p>minutes</p>
+            </div>
+          </div>
+          <div class="cycle-dots" id="cycleDots" aria-label="Pomodoro cycle progress"></div>
+        </section>
+
+        <section class="queue">
+          <div class="section-heading">
+            <h2>Tasks</h2>
+            <button class="text-button" id="clearTasks" type="button">Clear</button>
+          </div>
+          <form class="task-form" id="taskForm">
+            <input id="newTask" type="text" maxlength="48" placeholder="Add a task" />
+            <button class="icon-button add" type="submit" aria-label="Add task">+</button>
+          </form>
+          <ul class="task-list" id="taskList"></ul>
+        </section>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
